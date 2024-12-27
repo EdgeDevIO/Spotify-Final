@@ -1,0 +1,4 @@
+nodriver==0.38.post1
+PyMySQL==1.1.0
+pyotp==2.9.0
+Requests==2.32.3
