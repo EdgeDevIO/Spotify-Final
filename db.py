@@ -2,8 +2,8 @@ import pymysql.cursors
 from logger import log
 log = log(
 	log_level="INFO",
-	error_webhook="https://discord.com/api/webhooks/1312960982817050706/r5v3fYRBONjXulTyc0UGslear2PRB9qIcutg8INJsqHI_fPcO31fASwxIWg-AVSHpvBo",  # noqa: E501
-	critical_webhook="https://discord.com/api/webhooks/1312960874889216083/vKxMcXl2Jx_zVfOn3X4uki90LxQHbenFeDyqgon1zYCkmcdYvx7Tm7Kcfi8es4YRDZrC",  # noqa: E501
+	error_webhook="https://discord.com/api/webhooks/1315498715078983691/D6Ef9MXpjzmcbjZ1yKuRjXPy6jVvwg_xc4kSd2yqc9CKAuaxyTl0pr5hF6Rpze6Po1lt",  # noqa: E501
+	critical_webhook="https://discord.com/api/webhooks/1315498559885541476/4LFZiDhxHKmLsFSd23PxdWR1caBrUbNqWLVcUnozIX4YorH1GhWCjMvga5nH_0uE75uL",  # noqa: E501
 )
 
 

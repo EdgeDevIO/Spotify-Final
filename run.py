@@ -3,7 +3,8 @@ import time
 from datetime import datetime, timedelta
 import os
 
-def start_script_daily(script_path, start_time=1759):
+
+def start_script_daily(script_path, start_time=1218):
 	# Extract hour and minute from the input time
 	hour = start_time // 100
 	minute = start_time % 100
