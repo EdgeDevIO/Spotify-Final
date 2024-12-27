@@ -259,7 +259,7 @@ async def Login(tab, account, song):
 
 	# Send email
 	log.debug('Insert email')
-	await tab.wait()
+	await tab.wait(3)
 	await SendKeysBySelector(tab, "input[type=email]", account['email'])
 
 	# Click Next
@@ -269,13 +269,13 @@ async def Login(tab, account, song):
 
 	# Check for captcha
 	log.debug('Check for captcha')
-	await tab.wait()
+	await tab.wait(3)
 	await CheckPresenceByText(tab, "Verify it’s you")
 	# IMPLEMENT CAPTCHA HANDLING
 
 	# Send password
 	log.debug('Insert password')
-	await tab.wait(3)
+	await tab.wait(5)
 	await SendKeysBySelector(tab, "input[type=password]", account['password'])
 
 	# Click Next
