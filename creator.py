@@ -18,20 +18,13 @@ import asyncio
 from nodriver.cdp import fetch
 
 
-log = log(
-	log_level="DEBUG",
-	error_webhook="https://discord.com/api/webhooks/1315498715078983691/D6Ef9MXpjzmcbjZ1yKuRjXPy6jVvwg_xc4kSd2yqc9CKAuaxyTl0pr5hF6Rpze6Po1lt",  # noqa: E501
-	critical_webhook="https://discord.com/api/webhooks/1315498559885541476/4LFZiDhxHKmLsFSd23PxdWR1caBrUbNqWLVcUnozIX4YorH1GhWCjMvga5nH_0uE75uL",  # noqa: E501
-)
-
-
 # Load config
 def GetConfig(file_path='config.ini'):
 	config = configparser.ConfigParser()
 	config.read(file_path)
 
 	if 'mysql' not in config:
-		log.critical(
+		print(
 			f"Section 'mysql' not found in the {file_path} file. Program closed."
 		)
 		exit()
@@ -51,11 +44,6 @@ def GetConfig(file_path='config.ini'):
 
 config = GetConfig()
 
-
-# Settings
-super_debug = config['settings']['super_debug']
-
-
 # Load DB
 db = MySQL(
 	config['database']['host'],
@@ -67,7 +55,17 @@ db = MySQL(
 try:
 	settings = db.GetSettings()
 except Exception:
-	log.critical('MySQL connection failed. Exiting program.')
+	print('MySQL connection failed. Exiting program.')
+
+log = log(
+	log_level=settings['log_level'].upper(),
+	error_webhook="https://discord.com/api/webhooks/1315498715078983691/D6Ef9MXpjzmcbjZ1yKuRjXPy6jVvwg_xc4kSd2yqc9CKAuaxyTl0pr5hF6Rpze6Po1lt",  # noqa: E501
+	critical_webhook="https://discord.com/api/webhooks/1315498559885541476/4LFZiDhxHKmLsFSd23PxdWR1caBrUbNqWLVcUnozIX4YorH1GhWCjMvga5nH_0uE75uL",  # noqa: E501
+)
+
+# Settings
+super_debug = config['settings']['super_debug']
+
 
 # Spotify URL
 spotify_signup_url = settings['spotify_signup_url']

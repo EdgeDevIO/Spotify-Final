@@ -73,6 +73,7 @@ log = log(
 	critical_webhook="https://discord.com/api/webhooks/1315498559885541476/4LFZiDhxHKmLsFSd23PxdWR1caBrUbNqWLVcUnozIX4YorH1GhWCjMvga5nH_0uE75uL",  # noqa: E501
 )
 
+
 async def main(account, song):
 	email = account['email']
 	# Setup Driver

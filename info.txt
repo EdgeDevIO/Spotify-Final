@@ -1,0 +1,53 @@
+Start file information:
+	Update		-Updates the bot when I push an update.
+	Run			-Runs the bot immediately.
+	Bot			-Runs the bot at time set in config.
+	Creator 	-Runs the creator.
+
+
+Config information:
+	[mysql]
+	host		-MySQL host (ip).
+	user		-MySQL username.
+	password	-MySQL password.
+	database	-MySQL database name.
+	
+	[settings]
+	super_debug	- Ignore this, this is for debugging if there are issues.
+	start_time 	- The time to start the bot everyday. It uses 24 hr time and goes off the server's time. (500 is 5 am, 1200 is noon, 1500 is 3 PM.)
+				  You can also set minutes such as (530, 1225, 1550).
+
+Settings information (database):
+	spotify_signup_url	- Ignore this. The url to signup for spotify.
+	signup_with_gmail	- Ignore this.
+	action_range_low	- The time in seconds between actions (low).
+	action_range_high	- The time in seconds between actions (high).
+	follow_chance		- The percent chance that the account follows.
+	save_chance			- The percent chance that the account saves.
+	proxy_host			- The proxys host
+	proxy_port			- The proxys port
+	proxy_username		- The proxys username
+	proxy_password		- The proxys password
+	proxy_rotate_url	- The proxys rotation url
+	log_level			- Ignore this. Should be set at INFO.
+
+	Notes:
+		The action range will not accept anything other than whole numbers. (1, 5, 10). Do not put decimals.
+		The low value should obviously be lower than the high value. If not, this will break.
+		The follow and save chance is the same way. (50, 25, 30).
+
+Creator setup information:
+	1. Insert email, password, and two_factor as a new entry in the database (emails table).
+	2. Start creator. It will register the account and alter the other information needed automatically.
+
+	Notes:
+	You can add multiple entries in the database before running the creator.
+	For example, you can insert 10 accounts into the database and then run the creator.
+
+Bot setup information:
+	1. Have registered accounts.
+	2. Insert url, range_low, and range_high for a song.
+		url: The spotify song url. (https://open.spotify.com/track/51Y8KcQ33KNRTCGh6fzv0k)
+		range_low & range_high: The range of actions. For example if you use the link above and set it at 5-5 range it will
+			perform actions on this url 5 times with different accounts. This is per day.
+	3. Start 'Bot' or 'Run'.

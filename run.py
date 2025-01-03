@@ -2,9 +2,50 @@ import subprocess
 import time
 from datetime import datetime, timedelta
 import os
+import configparser
+from logger import log
+
+log = log(
+	log_level="INFO",
+	error_webhook="https://discord.com/api/webhooks/1315498715078983691/D6Ef9MXpjzmcbjZ1yKuRjXPy6jVvwg_xc4kSd2yqc9CKAuaxyTl0pr5hF6Rpze6Po1lt",  # noqa: E501
+	critical_webhook="https://discord.com/api/webhooks/1315498559885541476/4LFZiDhxHKmLsFSd23PxdWR1caBrUbNqWLVcUnozIX4YorH1GhWCjMvga5nH_0uE75uL",  # noqa: E501
+)
 
 
-def start_script_daily(script_path, start_time=1218):
+def GetConfig(file_path='config.ini'):
+	config = configparser.ConfigParser()
+	config.read(file_path)
+
+	if 'mysql' not in config:
+		log.critical(
+			f"Section 'mysql' not found in the {file_path} file. Program closed."
+		)
+		exit()
+
+	if 'start_time' not in config['settings']:
+		log.critical(
+			f"'start_time' not found in the 'settings' section of the {file_path} file. Program closed."
+		)
+		exit()
+
+	return {
+		'database': {
+			'host': config['mysql']['host'],
+			'user': config['mysql']['user'],
+			'password': config['mysql']['password'],
+			'database': config['mysql']['database']
+		},
+		'settings': {
+			'super_debug': config['settings']['super_debug'],
+			'start_time': int(config['settings']['start_time'])
+		}
+	}
+
+
+config = GetConfig()
+
+
+def start_script_daily(script_path, start_time=500):
 	# Extract hour and minute from the input time
 	hour = start_time // 100
 	minute = start_time % 100
@@ -50,4 +91,4 @@ def start_script_daily(script_path, start_time=1218):
 		print("Waiting for the next scheduled run...\n")
 
 
-start_script_daily('bot.py')
+start_script_daily('bot.py', start_time=config['settings']['start_time'])
